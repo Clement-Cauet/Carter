@@ -1,0 +1,16 @@
+.EditCarte{
+    text-align: center;
+}
+
+.Inscription{
+    text-align: center;
+}
+
+textarea{
+    
+    height:30%;
+    resize:none;
+}
+label{
+    display:block;
+}
