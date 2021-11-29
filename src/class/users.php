@@ -53,21 +53,21 @@
         }
        
         //Fonction inscrire et insérer les données dans la bdd
-        /*public function inscription(){
+        public function inscription(){
             $afficheForm = true;
-            $error1 = false;
-            $error2 = false;
+            /*$error1 = false;
+            $error2 = false;*/
             $_SESSION["Connected"] = false;
-            if(isset($_POST["login"]) && isset($_POST["mdp"]) && isset($_POST["conf-mdp"])){
-                if($_POST["mdp"] == $_POST["conf-mdp"]){
-                    $this->_req = "SELECT COUNT(*) FROM `users` WHERE `login`='".$_POST['login']."' AND `password` = '".$_POST['mdp']."'";
+            if(isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["carte_id"])){
+                /*if($_POST["prenom"] == $_POST["conf-mdp"]){*/
+                    $this->_req = "SELECT COUNT(*) FROM `users` WHERE `nom`='".$_POST['nom']."' AND `prenom` = '".$_POST['prenom']."'";
                     $Result = $this->_bdd->query($this->_req);
                     $nbr = $Result->fetch();
                     if($nbr['COUNT(*)'] == 0){
-                        $login = $_POST['login']; $mdp = $_POST['mdp']; $admin = 0;
-                        $this->_req = "INSERT INTO `users`(`login`, `password`, `admin`) VALUES('$login', '$mdp', '$admin')";
+                        $carteid = $POST['carte_id'];$nom = $_POST['nom']; $prenom = $_POST['prenom']; $admin = 0;
+                        $this->_req = "INSERT INTO `users`(`carte_id`,`nom`, `prenom`, `admin`) VALUES('$carte_id', '$nom', '$prenom', '$admin')";
                         $Result = $this->_bdd->query($this->_req);
-                        $this->_req = "SELECT * FROM `users` WHERE `login`='".$_POST['login']."' AND `password` = '".$_POST['mdp']."'";
+                        $this->_req = "SELECT * FROM `users` WHERE `nom`='".$_POST['nom']."' AND `prenom` = '".$_POST['prenom']."'";
                         $Result = $this->_bdd->query($this->_req);
                         if($tab = $Result->fetch()){
                             $this->setUserByID($tab["id"]);
@@ -79,16 +79,16 @@
                     }else{
                         $error2 = true;
                     }
-                }else{
+                /*}else{
                     $error1 = true;
-                }
+                }*/
             }else{
                 $afficheForm = true;
             }
 
             if($afficheForm == true){
                 ?>
-                    <head>
+                    <!--<head>
                         <meta charset="UTF-8">
                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
                         <title>Inscription</title>
@@ -96,7 +96,7 @@
                         <link rel='stylesheet' type='text/css' href='src/css/style.css'>
                         <link rel='stylesheet' type='text/css' href='src/css/formulaire.css'>
                     </head>
-                    <body>
+                    <body>-->
                         <div class="back">
                             <div class="form-user">
                                 <h2>Inscription</h2>
@@ -110,25 +110,25 @@
                                         }
                                     ?>
                                     <div class="user">
-                                        <input type="text" id="login" name="login" class="login-input" placeholder="Votre login" autocomplete="off" autocapitalize="off" required></input>
+                                        <input type="text" id="login" name="login" class="login-input" placeholder="Carte_ID" autocomplete="off" autocapitalize="off" required></input>
                                     </div>
                                     <div class="mdp">
-                                        <input type="password" id="mdp" name="mdp" class="mdp-input" placeholder="Votre mot de passe" autocomplete="off" autocapitalize="off" required></input>
+                                        <input type="text" id="mdp" name="mdp" class="mdp-input" placeholder="Nom" autocomplete="off" autocapitalize="off" required></input>
                                     </div>
                                     <div class="conf-mdp">
-                                        <input type="password" id="conf-mdp" name="conf-mdp" class="conf-mdp-input" placeholder="Confirmer votre mot de passe" autocomplete="off" autocapitalize="off" required></input>
+                                        <input type="text" id="conf-mdp" name="conf-mdp" class="conf-mdp-input" placeholder="Prenom" autocomplete="off" autocapitalize="off" required></input>
                                     </div>
                                     <div class="submit-button">
                                         <input type="submit" class="button" value="S'inscrire"></input>
                                     </div>
-                                    <p><a href="index.php">Déjà un compte</a></p>
+                                    <!--<p><a href="index.php">Déjà un compte</a></p>-->
                                 </form>
                             </div>
                         </div>
-                    </body>
+                    <!--</body>-->
                 <?php
             }
-        }*/
+        }
 
         //Fonction qui permet de se connecter
         /*public function connexion(){
