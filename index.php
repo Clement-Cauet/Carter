@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+    <?php
+    session_start();
+        include ("session.php");
+    ?>
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +15,7 @@
 
 <body>
 
-    <div class="EditCarte">
+    <!--<div class="EditCarte">
         <form action="" method="">
             <label>Editer la carte</label>
             <textarea name="zoneEditCarte"></textarea>
@@ -19,10 +23,10 @@
                 <input type="button" value="Envoyer">
             </div>
         </form>
-    </div>
+    </div>-->
 
-    <div class="Inscription">
-        <form action="" method="">
+    <!--<div class="Inscription">
+        <form action="" method="post">
             <input type="text" name="nom" placeholder="Nom">
             <input type="text" name="prenom" placeholder="Prenom">
             <input type="button" value="S'inscrire">
@@ -30,7 +34,7 @@
     </div>
 
     <div class="Admin-insert">
-        <form action="" method="post">
+        <form method="post">
             <input type="text" name="nom" placeholder="Nom">
             <input type="text" name="prenom" placeholder="Prenom">
             <select name="admin">
@@ -53,7 +57,7 @@
             </select>
             <input type="button" value="Modifier">
         </form>
-    </div>
+    </div>-->
 
     <div class="Admin-delete">
         <form action="" method="">
@@ -64,7 +68,12 @@
     <div class="Data-bdd">
 
     </div>
-
+<?php
+    $user->selectUser();
+    $user->insertUser();
+    $user->formUser($id);
+    //$user->formUser($id);
+?>
 
 
 </body>

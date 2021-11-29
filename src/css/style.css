@@ -14,3 +14,9 @@ textarea{
 label{
     display:block;
 }
+.insertuser{
+    text-align: center;
+}
+.user{
+    text-align: center;
+}

@@ -3,8 +3,9 @@
 
         // - Propriétés
         private $_id;
-        private $_login;
-        private $_password;
+        private $_carteid;
+        private $_nom;
+        private $_prenom;
         private $_admin;
         private $_bdd;
         private $_req;
@@ -15,19 +16,20 @@
         }
 
         // Initialisation des variables
-        public function setUser($id, $login, $password, $admin){
+        public function setUser($id, $carteid, $nom, $prenom, $admin){
             $this->_id = $id;
-            $this->_login = $login;
-            $this->_password = $password;
+            $this->_carteid = $carteid;
+            $this->_nom = $nom;
+            $this->_prenom = $prenom;
             $this->_admin = $admin;
         }
 
         // Permet de récupérer les données de l'utilisateur en BDD
         public function setUserByID($id){
-            $req = "SELECT * FROM `users` WHERE `id`='".$id."'";
+            $req = "SELECT * FROM `users` WHERE `user_id`='".$id."'";
             $Result = $this->_bdd->query($req);
             while($tab = $Result->fetch()){
-                $this->setUser($tab["id"], $tab["login"], $tab["password"], $tab["admin"]);
+                $this->setUser($tab["user_id"],$tab["carte_id"], $tab["nom"], $tab["prenom"], $tab["admin"]);
             }
         }
 
@@ -37,8 +39,12 @@
         }
 
         // Retour de la variable $_user
-        public function getLogin(){
-            return $this->_login;
+        public function getnom(){
+            return $this->_nom;
+        }
+
+        public function getcarteID(){
+            return $this->_carteid;
         }
 
         // Retour de la variable $_admin
@@ -47,7 +53,7 @@
         }
        
         //Fonction inscrire et insérer les données dans la bdd
-        public function inscription(){
+        /*public function inscription(){
             $afficheForm = true;
             $error1 = false;
             $error2 = false;
@@ -122,15 +128,15 @@
                     </body>
                 <?php
             }
-        }
+        }*/
 
         //Fonction qui permet de se connecter
-        public function connexion(){
+        /*public function connexion(){
             $afficheForm = true;
             $error = false;
             $_SESSION["Connected"] = false;
-            if(isset($_POST["login"]) && isset($_POST["mdp"])){
-                $this->_req = "SELECT * FROM `users` WHERE `login`='".$_POST['login']."' AND `password` = '".$_POST['mdp']."'";
+            if(isset($_POST["nom"]) && isset($_POST["prenom"])){
+                $this->_req = "SELECT * FROM `users` WHERE `nom`='".$_POST['nom']."' AND `prenom` = '".$_POST['prenom']."'";
                 $Result = $this->_bdd->query($this->_req);
                 if($tab = $Result->fetch()){
                     $this->setUserByID($tab["id"]);
@@ -182,25 +188,26 @@
                 <?php
             } 
         }
-
+*/
         //Fonction se deconnecter de la session
-        public function deconnexion(){
+        /*public function deconnexion(){
             session_unset();
             session_destroy();
             unset($_POST);
             echo '<meta http-equiv="refresh" content="0">';
-        }
+        }*/
 
         // Affiche les données (id, login, admin) de l'utilisateur
         public function selectUser(){
-            $this->_req = "SELECT `id`, `login`, `admin` FROM `users` WHERE 1";
+            $this->_req = "SELECT `user_id`, `carte_id`, `nom`, `prenom` FROM `users` WHERE 1";
             $Result = $this->_bdd->query($this->_req);
             ?>
+            <div class="user">
                 <table>
                     <thead>
                         <tr>
                             <td>ID</td>
-                            <td>Login</td>
+                            <td>Nom</td>
                             <td>Admin</td>
                         </tr>
                     </thead>
@@ -208,20 +215,20 @@
                         <?php
                             while($tab = $Result->fetch()){
                                 ?>
-                                    <tr id="<?= $tab['id'] ?>">
+                                    <tr id="<?= $tab['user_id'] ?>">
                                         <td>
                                             <div>
-                                                <a href="./src/edit/editUser.php?user=<?= $tab['id'] ?>"><?= $tab['id'] ?></a>
+                                                <?//= $tab['user_id'] ?><?= $tab['user_id'] ?>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <a href="./src/edit/editUser.php?user=<?= $tab['id'] ?>"><?= $tab['login'] ?></a>
+                                                <?//= $tab['user_id'] ?><?= $tab['nom'] ?>
                                             </div>
                                         </td>
                                         <td>
                                             <div>
-                                                <a href="./src/edit/editUser.php?user=<?= $tab['id'] ?>">
+                                                <?//= $tab['user_id'] ?>
                                                     <?php
                                                         if($tab['admin'] == 0){
                                                             echo "Non";
@@ -229,7 +236,7 @@
                                                             echo "Oui";
                                                         }
                                                     ?>
-                                                </a>
+                                                
                                             </div>
                                         </td>
                                     </tr>
@@ -238,25 +245,29 @@
                         ?>
                     </tbody>
                 </table>
+                        </div>
             <?php
         }
 
         // Permet d'ajouter un utilisateur en BDD
         public function insertUser(){
             ?>
+            <div class="insertuser">
                 <form method="post">
                     <div class="account">
                         <div class="input">
-                            <input type="text" id="login" name="login" class="form-input" placeholder="Login" required>
+                            <input type="text" id="carteid" placeholder="ID carte" required>
                         </div>
                         <div class="input">
-                            <input type="text" id="password" name="password" class="form-input" placeholder="Mot de passe" required>
+                            <input type="text" id="login" name="login" class="form-input" placeholder="nom" required>
+                        </div>
+                        <div class="input">
+                            <input type="text" id="password" name="password" class="form-input" placeholder="prenom" required>
                         </div>
                     </div>
                     <div class="admin">
-                        <label>Administrateur : </label>
                         <select name="admin" class="form-input" required>
-                            <option value=""></option>
+                        <option value="" disable select hidden>Admin</option>
                             <option value="1">Oui</option>
                             <option value="0">Non</option>
                         </select>
@@ -265,10 +276,11 @@
                         <input type="submit" name="submit" class="button" value="Ajouter">
                     </div>
                 </form>
+        </div>
             <?php
             if(isset($_POST['submit'])){
-                $login = $_POST['login']; $password = $_POST['password']; $admin = $_POST['admin'];
-                $this->_req = "INSERT INTO `users`(`login`, `password`, `admin`) VALUES('$login', '$password', '$admin')";
+                $carteid = $_POST['carte_id']; $prenom = $_POST['prenom']; $nom = $_POST['nom']; $admin = $_POST['admin'];
+                $this->_req = "INSERT INTO `users`(`carte_id`,`prenom`, `nom`, `admin`) VALUES('$carteid','$prenom', '$nom', '$admin')";
                 $this->_bdd->query($this->_req);
                 unset($_POST);
                 echo '<meta http-equiv="refresh" content="0">';
@@ -278,17 +290,18 @@
         // Formulaire pour la modification et la suppression d'un utilisateur
         public function formUser($id){
 
-            $this->_req = "SELECT `login`, `password`, `admin` FROM `users` WHERE `id` = '".$id."'";
+            $this->_req = "SELECT `carte_id`, `nom`, `prenom`, `admin` FROM `users` WHERE `user_id` = '".$id."'";
             $Result = $this->_bdd->query($this->_req);
             if ( $tab = $Result->fetch() ){
                 ?>
                     <div class="form-user">
                         <form method="post">
                             <div class="account">
-                                <label>Login : </label>
-                                <input type="text" class="form-input" id="login" name="login" value="<?= $tab['login'] ?>" required>
-                                <label>Mot de passe : </label>
-                                <input type="text" class="form-input" id="mdp" name="mdp" value="<?= $tab['password'] ?>" required>
+                                <input type="text" name="carte id" value="<?= $tab['carte_id'] ?>" required>
+                                <label>Nom : </label>
+                                <input type="text" class="form-input" id="login" name="login" value="<?= $tab['nom'] ?>" required>
+                                <label>Prenom : </label>
+                                <input type="text" class="form-input" id="mdp" name="mdp" value="<?= $tab['prenom'] ?>" required>
                             </div>
                             <div class="admin">
                                 <label>Administrateur : </label>
