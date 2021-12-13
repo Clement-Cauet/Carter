@@ -38,6 +38,10 @@
             return $this->_id;
         }
 
+        public function getPrenom(){
+            return $this->_prenom;
+        }
+
         // Retour de la variable $_user
         public function getnom(){
             return $this->_nom;
@@ -60,12 +64,12 @@
             $_SESSION["Connected"] = false;
             if(isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["carte_id"])){
                 /*if($_POST["prenom"] == $_POST["conf-mdp"]){*/
-                    $this->_req = "SELECT COUNT(*) FROM `users` WHERE `nom`='".$_POST['nom']."' AND `prenom` = '".$_POST['prenom']."'";
+                    $this->_req = "SELECT COUNT(*) FROM `users` WHERE `carte_id`='".$_POST['carte_id']."' AND `nom`='".$_POST['nom']."' AND `prenom` = '".$_POST['prenom']."'";
                     $Result = $this->_bdd->query($this->_req);
                     $nbr = $Result->fetch();
                     if($nbr['COUNT(*)'] == 0){
-                        $carteid = $POST['carte_id'];$nom = $_POST['nom']; $prenom = $_POST['prenom']; $admin = 0;
-                        $this->_req = "INSERT INTO `users`(`carte_id`,`nom`, `prenom`, `admin`) VALUES('$carte_id', '$nom', '$prenom', '$admin')";
+                        $carteid = $_POST['carte_id'];$nom = $_POST['nom']; $prenom = $_POST['prenom']; $admin = 0;
+                        $this->_req = "INSERT INTO `users`(`carte_id`,`nom`, `prenom`, `admin`) VALUES('$carteid', '$nom', '$prenom', '$admin')";
                         $Result = $this->_bdd->query($this->_req);
                         $this->_req = "SELECT * FROM `users` WHERE `nom`='".$_POST['nom']."' AND `prenom` = '".$_POST['prenom']."'";
                         $Result = $this->_bdd->query($this->_req);
@@ -102,9 +106,9 @@
                                 <h2>Inscription</h2>
                                 <form method="post">
                                     <?php
-                                        if($error1 == true){
+                                        /*if($error1 == true){
                                             ?><div class="erreur">Veuillez confirmer le même mot de passe</div><?php
-                                        }
+                                        }*/
                                         if($error2 == true){
                                             ?><div class="erreur">Compte déjà existant</div><?php
                                         }
@@ -228,12 +232,12 @@
                                         </td>
                                         <td>
                                             <div>
-                                                <?//= $tab['user_id'] ?>
+                                                
                                                     <?php
-                                                        if($tab['admin'] == 0){
-                                                            echo "Non";
-                                                        }else{
+                                                        if($tab['admin'] == 1){
                                                             echo "Oui";
+                                                        }else{
+                                                            echo "Non";
                                                         }
                                                     ?>
                                                 
@@ -256,13 +260,13 @@
                 <form method="post">
                     <div class="account">
                         <div class="input">
-                            <input type="text" id="carteid" placeholder="ID carte" required>
+                            <input type="text" id="carte_id" name="carte_id" placeholder="ID carte" required>
                         </div>
                         <div class="input">
-                            <input type="text" id="login" name="login" class="form-input" placeholder="nom" required>
+                            <input type="text" id="prenom" name="prenom" class="form-input" placeholder="nom" required>
                         </div>
                         <div class="input">
-                            <input type="text" id="password" name="password" class="form-input" placeholder="prenom" required>
+                            <input type="text" id="nom" name="nom" class="form-input" placeholder="prenom" required>
                         </div>
                     </div>
                     <div class="admin">
@@ -288,20 +292,20 @@
         }
 
         // Formulaire pour la modification et la suppression d'un utilisateur
-        public function formUser($id){
+        public function formUser(){
 
-            $this->_req = "SELECT `carte_id`, `nom`, `prenom`, `admin` FROM `users` WHERE `user_id` = '".$id."'";
+            $this->_req = "SELECT `carte_id`, `nom`, `prenom`, `admin` FROM `users`";
             $Result = $this->_bdd->query($this->_req);
             if ( $tab = $Result->fetch() ){
                 ?>
                     <div class="form-user">
                         <form method="post">
                             <div class="account">
-                                <input type="text" name="carte id" value="<?= $tab['carte_id'] ?>" required>
+                                <input type="text" name="carte_id" value="<?= $tab['carte_id'] ?>" required>
                                 <label>Nom : </label>
-                                <input type="text" class="form-input" id="login" name="login" value="<?= $tab['nom'] ?>" required>
+                                <input type="text" class="form-input" id="login" name="nom" value="<?= $tab['nom'] ?>" required>
                                 <label>Prenom : </label>
-                                <input type="text" class="form-input" id="mdp" name="mdp" value="<?= $tab['prenom'] ?>" required>
+                                <input type="text" class="form-input" id="mdp" name="prenom" value="<?= $tab['prenom'] ?>" required>
                             </div>
                             <div class="admin">
                                 <label>Administrateur : </label>

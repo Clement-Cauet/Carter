@@ -66,15 +66,13 @@
     </div>
 
     <div class="Data-bdd">
-
+        <?php $user->selectUser(); ?>
     </div>
 
 <?php
-    $user->selectUser();
     $user->insertUser();
-    $user->formUser($id);
-    $user->inscription();
-    //$user->formUser($id);
+    $user->formUser();
+
 ?>
 
 

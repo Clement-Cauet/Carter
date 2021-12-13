@@ -1,11 +1,7 @@
-.EditCarte{
+
+*{
     text-align: center;
 }
-
-.Inscription{
-    text-align: center;
-}
-
 textarea{
     
     height:30%;
@@ -14,9 +10,6 @@ textarea{
 label{
     display:block;
 }
-.insertuser{
-    text-align: center;
-}
 .user{
-    text-align: center;
+    margin-left: 45%;
 }
