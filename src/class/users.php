@@ -203,7 +203,7 @@
 
         // Affiche les données (id, login, admin) de l'utilisateur
         public function selectUser(){
-            $this->_req = "SELECT `user_id`, `carte_id`, `nom`, `prenom` FROM `users` WHERE 1";
+            $this->_req = "SELECT `user_id`, `carte_id`, `nom`, `prenom`, `admin` FROM `users`";
             $Result = $this->_bdd->query($this->_req);
             ?>
             <div class="user">
@@ -283,8 +283,8 @@
         </div>
             <?php
             if(isset($_POST['submit'])){
-                $carteid = $_POST['carte_id']; $prenom = $_POST['prenom']; $nom = $_POST['nom']; $admin = $_POST['admin'];
-                $this->_req = "INSERT INTO `users`(`carte_id`,`prenom`, `nom`, `admin`) VALUES('$carteid','$prenom', '$nom', '$admin')";
+                $carteid = $_POST['carte_id']; $nom = $_POST['nom']; $prenom = $_POST['prenom']; $admin = $_POST['admin'];
+                $this->_req = "INSERT INTO `users`(`carte_id`,`nom`, `prenom`, `admin`) VALUES('$carteid','$nom', '$prenom', '$admin')";
                 $this->_bdd->query($this->_req);
                 unset($_POST);
                 echo '<meta http-equiv="refresh" content="0">';

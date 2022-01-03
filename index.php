@@ -14,67 +14,16 @@
 </head>
 
 <body>
+    <div class="contenu">
 
-    <!--<div class="EditCarte">
-        <form action="" method="">
-            <label>Editer la carte</label>
-            <textarea name="zoneEditCarte"></textarea>
-            <div>
-                <input type="button" value="Envoyer">
-            </div>
-        </form>
-    </div>-->
+        <div class="Data-bdd">
+            <?php $user->selectUser(); ?>
+        </div>
 
-    <!--<div class="Inscription">
-        <form action="" method="post">
-            <input type="text" name="nom" placeholder="Nom">
-            <input type="text" name="prenom" placeholder="Prenom">
-            <input type="button" value="S'inscrire">
-        </form>
+        <?php
+            $user->insertUser();
+        ?>
     </div>
-
-    <div class="Admin-insert">
-        <form method="post">
-            <input type="text" name="nom" placeholder="Nom">
-            <input type="text" name="prenom" placeholder="Prenom">
-            <select name="admin">
-                <option value="" disable select hidden>Admin</option>
-                <option value="Yes">Oui</option>
-                <option value="No">Non</option>
-            </select>
-            <input type="button" value="Ajouter">
-        </form>
-    </div>
-
-    <div class="Admin-update">
-        <form action="" method="post">
-            <input type="text" name="nom" placeholder="Nom">
-            <input type="text" name="prenom" placeholder="Prenom">
-            <select name="admin">
-                <option value="" disable select hidden>Admin</option>
-                <option value="Yes">Oui</option>
-                <option value="No">Non</option>
-            </select>
-            <input type="button" value="Modifier">
-        </form>
-    </div>-->
-
-    <div class="Admin-delete">
-        <form action="" method="">
-            <input type="button" value="Supprimer">
-        </form>
-    </div>
-
-    <div class="Data-bdd">
-        <?php $user->selectUser(); ?>
-    </div>
-
-<?php
-    $user->insertUser();
-    $user->formUser();
-
-?>
-
 
 </body>
 
