@@ -1,3 +1,9 @@
 ﻿  Reading Qt configuration (C:/Qt2/5.14.2/msvc2017_64/bin/qmake)
+  moc Server.h
+  moc Reader.h
+  main.cpp
   Reader.cpp
+  Server.cpp
+  moc_Server.cpp
+  moc_Reader.cpp
   RFID.vcxproj -> C:\Users\Asgarrrr\source\repos\RFID\x64\Debug\RFID.exe

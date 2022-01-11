@@ -5,8 +5,7 @@
 
 int main( int argc, char *argv[] ) {
 
-	QCoreApplication a(argc, argv);
-	qDebug() << "Start --";
+	QCoreApplication a( argc, argv );
 
 	Server *server = new Server;
 

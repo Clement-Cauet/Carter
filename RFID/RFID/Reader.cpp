@@ -2,22 +2,27 @@
 
 Reader::Reader( QObject *parent ) : QObject( parent ) {
 
-	qDebug() << "Reader :: start";
+    if ( ReaderOpen() != 0 ) {
 
-	int status = ReaderOpen();
+        qDebug() << "Erreur, le lecteur n a pas pu etre ouvert";
+        exit( -1 );
+
+    }
+
+    qDebug() << "Lecteur ouvert";
 
 	GetReaderType( &readerType );
 	ReaderUISignal( 3, 3 );
 
 }
 
-void Reader::read( ) {	
+void Reader::read( ) {
 
 	QMap< QString, QVariant > Card;
 
-	Card["isset"] = false;
+	Card[ "isset" ] = false;
 
-	if ( GetDlogicCardType( &cardType ) )	
+	if ( GetDlogicCardType( &cardType ) )
 		return emit hasRead( Card );
 
 	GetCardId( &cardType, &cardSerial );
@@ -63,11 +68,11 @@ void Reader::write( QString newContent ) {
 					usBytesRet			= 10;
 
 	QByteArray test = newContent.toLatin1();
-	
-	unsigned char *res = (unsigned char *)strdup(test.constData());
+
+	unsigned char *res = ( unsigned char * )strdup( test.constData() );
 
 
-	LinearWrite(res, usLinearAddress, usDataLength, &usBytesRet, ucAuthMode, ucKeyIndex );
+	LinearWrite( res, usLinearAddress, usDataLength, &usBytesRet, ucAuthMode, ucKeyIndex );
 	Reader::read();
 }
 

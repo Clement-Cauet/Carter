@@ -4,6 +4,7 @@
 #include <QWebSocket>
 #include <QWebSocketServer>
 #include <QTimer>
+#include <qfile.h>
 #include "Reader.h"
 
 QT_FORWARD_DECLARE_CLASS( QWebSocketServer )
