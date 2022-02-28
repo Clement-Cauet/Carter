@@ -5,21 +5,24 @@ Server::Server( QObject *parent ) : QObject( parent ) {
 	webServer = new QWebSocketServer( QStringLiteral( "WebServer" ), QWebSocketServer::NonSecureMode, this );
 
     // Open configuration file for reading port number
-    QFile file( "config.ini" );
-    if ( !file.open( QIODevice::ReadOnly ) ) {
-        qDebug() << "Error, can't open config.ini";
-        exit( -1 );
-    }
+	QSettings *settings = new QSettings("config.ini", QSettings::IniFormat);
 
-    QTextStream in( &file );
-    QString line		= in.readLine();
-    QStringList list	= line.split( "=" );
-    QString port		= list.at( 1 );
+	QStringList list = settings->allKeys();
 
-    if ( !webServer->listen( QHostAddress::Any, port.toInt() ) ) {
-        qDebug() << "Error, can't listen on port " << port;
-        exit( -1 );
-    }
+	if (!settings->contains("PORT/port"))
+	{
+		settings->beginGroup("PORT");
+		settings->setValue("port", "3004");
+		settings->endGroup();
+		settings->sync();
+	}
+
+	int port = settings->value("PORT/port", "config").toInt();
+
+	if (!webServer->listen(QHostAddress::Any, port)) {
+		qDebug() << "Error, can't listen on port " << port;
+		exit(-1);
+	}
 
 	QObject::connect( webServer, &QWebSocketServer::newConnection, this, &Server::onWebServerNewConnection );
 

@@ -6,7 +6,7 @@ let editMode = false;
 let currentCard = [ false, 0, 0, "" ];
 
 // Websocket connection to the reader
-const socket = new WebSocket( "ws://192.168.64.103:4457" );
+const socket = new WebSocket( "ws://192.168.65.62:3004" );
 let isAdmin  = false;
 let verify = false;
 

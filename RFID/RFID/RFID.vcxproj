@@ -31,12 +31,12 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>5.14.2_msvc2017_64</QtInstall>
+    <QtInstall>msvc2017_64</QtInstall>
     <QtModules>core; websockets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>5.14.2_msvc2017_64</QtInstall>
+    <QtInstall>msvc2017_64</QtInstall>
     <QtModules>core; websockets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
@@ -55,22 +55,22 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <LibraryPath>C:\Users\Asgarrrr\source\repos\RFID;C:\Users\Asgarrrr\source\repos\RFID\RFID\ufr-lib\include;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Asgarrrr\source\repos\RFID\RFID\ufr-lib\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\CAUET-Clement\Desktop\RFID\RFID;C:\Users\CAUET-Clement\Desktop\RFID\RFID\RFID\ufr-lib\include;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\CAUET-Clement\Desktop\RFID\RFID\RFID\ufr-lib\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <LibraryPath>C:\Users\Asgarrrr\source\repos\RFID;C:\Users\Asgarrrr\source\repos\RFID\RFID\ufr-lib\include;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Asgarrrr\source\repos\RFID\RFID\ufr-lib\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\CAUET-Clement\Desktop\RFID\RFID;C:\Users\CAUET-Clement\Desktop\RFID\RFID\RFID\ufr-lib\include;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\CAUET-Clement\Desktop\RFID\RFID\RFID\ufr-lib\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\Asgarrrr\source\repos\RFID\RFID\ufr-lib\windows\x86_64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\CAUET-Clement\Desktop\RFID\RFID\RFID\ufr-lib\windows\x86_64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>uFCoder-x86_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\Asgarrrr\source\repos\RFID\RFID\ufr-lib\windows\x86_64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\CAUET-Clement\Desktop\RFID\RFID\RFID\ufr-lib\windows\x86_64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>uFCoder-x86_64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
